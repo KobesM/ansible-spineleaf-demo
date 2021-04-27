@@ -1,0 +1,208 @@
+project_name: "Spine Leaf Project Demo"
+
+gns3_server: "localhost"
+gns3_port: "3080"
+
+nodes:
+  - name: OOB_Network
+    template_name: "Cloud"
+    x_position: -50
+    y_position: -250
+    os: "none"
+  - name: OOB_Switch
+    template_name: "Ethernet switch"
+    x_position: 0
+    y_position: -100
+    os: "none"
+  - name: Spine-01
+    template_name: "Juniper vQFX RE 18.4R1"
+    x_position: -200
+    y_position: 0
+    os: "junos"
+    ip: "10.99.2.101"
+    mask: 24
+    gateway: "10.99.2.1"
+  - name: Spine-01-PFE
+    template_name: "Juniper vQFX PFE 18.4R1"
+    x_position: -300
+    y_position: 0
+    os: "none"
+  - name: Spine-02
+    template_name: "Juniper vQFX RE 18.4R1"
+    x_position: 200
+    y_position: 0
+    os: "junos"
+    ip: "10.99.2.102"
+    mask: 24
+    gateway: "10.99.2.1"
+  - name: Spine-02-PFE
+    template_name: "Juniper vQFX PFE 18.4R1"
+    x_position: 300
+    y_position: 0
+    os: "none"
+  - name: Leaf-01
+    template_name: "Juniper vQFX RE 18.4R1"
+    x_position: -300
+    y_position: 200
+    os: "junos"
+    ip: "10.99.2.111"
+    mask: 24
+    gateway: "10.99.2.1"
+  - name: Leaf-01-PFE
+    template_name: "Juniper vQFX PFE 18.4R1"
+    x_position: -300
+    y_position: 300
+    os: "none"
+  - name: Leaf-02
+    template_name: "Juniper vQFX RE 18.4R1"
+    x_position: -100
+    y_position: 200
+    os: "junos"
+    ip: "10.99.2.112"
+    mask: 24
+    gateway: "10.99.2.1"
+  - name: Leaf-02-PFE
+    template_name: "Juniper vQFX PFE 18.4R1"
+    x_position: -100
+    y_position: 300
+    os: "none"
+  - name: Leaf-03
+    template_name: "Juniper vQFX RE 18.4R1"
+    x_position: 100
+    y_position: 200
+    os: "junos"
+    ip: "10.99.2.113"
+    mask: 24
+    gateway: "10.99.2.1"
+  - name: Leaf-03-PFE
+    template_name: "Juniper vQFX PFE 18.4R1"
+    x_position: 100
+    y_position: 300
+    os: "none"
+  - name: Leaf-04
+    template_name: "Juniper vQFX RE 18.4R1"
+    x_position: 300
+    y_position: 200
+    os: "junos"
+    ip: "10.99.2.114"
+    mask: 24
+    gateway: "10.99.2.1"
+  - name: Leaf-04-PFE
+    template_name: "Juniper vQFX PFE 18.4R1"
+    x_position: 300
+    y_position: 300
+    os: "none"
+
+links:
+  # Links between QFX RE and PFE
+  - link:
+    - name: Spine-01
+      interface: 1
+    - name: Spine-01-PFE
+      interface: 1
+  - link:
+    - name: Spine-02
+      interface: 1
+    - name: Spine-02-PFE
+      interface: 1
+  - link:
+    - name: Leaf-01
+      interface: 1
+    - name: Leaf-01-PFE
+      interface: 1
+  - link:
+    - name: Leaf-02
+      interface: 1
+    - name: Leaf-02-PFE
+      interface: 1
+  - link:
+    - name: Leaf-03
+      interface: 1
+    - name: Leaf-03-PFE
+      interface: 1
+  - link:
+    - name: Leaf-04
+      interface: 1
+    - name: Leaf-04-PFE
+      interface: 1
+  # Links between QFX Leafs and Spines
+  - link:
+    - name: Leaf-01
+      interface: 2
+    - name: Spine-01
+      interface: 2
+  - link:
+    - name: Leaf-01
+      interface: 3
+    - name: Spine-02
+      interface: 2
+  - link:
+    - name: Leaf-02
+      interface: 2
+    - name: Spine-01
+      interface: 3
+  - link:
+    - name: Leaf-02
+      interface: 3
+    - name: Spine-02
+      interface: 3
+  - link:
+    - name: Leaf-03
+      interface: 2
+    - name: Spine-01
+      interface: 4
+  - link:
+    - name: Leaf-03
+      interface: 3
+    - name: Spine-02
+      interface: 4
+  - link:
+    - name: Leaf-04
+      interface: 2
+    - name: Spine-01
+      interface: 5
+  - link:
+    - name: Leaf-04
+      interface: 3
+    - name: Spine-02
+      interface: 5
+  # OOB Management
+  - link:
+    - name: OOB_Switch
+      interface: 0
+    - name: OOB_Network
+      interface: 1
+  - link:
+    - name: OOB_Switch
+      interface: 1
+    - name: Spine-01
+      interface: 0
+  - link:
+    - name: OOB_Switch
+      interface: 2
+    - name: Spine-02
+      interface: 0
+  - link:
+    - name: OOB_Switch
+      interface: 3
+    - name: Leaf-01
+      interface: 0
+  - link:
+    - name: OOB_Switch
+      interface: 4
+    - name: Leaf-02
+      interface: 0
+  - link:
+    - name: OOB_Switch
+      interface: 5
+    - name: Leaf-03
+      interface: 0
+  - link:
+    - name: OOB_Switch
+      interface: 6
+    - name: Leaf-04
+      interface: 0
+  
+
+
+
