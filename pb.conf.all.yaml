@@ -26,25 +26,3 @@
       ansible.builtin.file: 
         path: "{{ render_dir }}"
         state: directory
-
-- name: Create configuration for Spine Fabric
-  hosts: spine
-  connection: ansible.builtin.local
-  gather_facts: no
-  roles:
-    - base
-    - underlay-ebgp
-    - overlay-evpn-spine
-    - overlay-evpn-access
-    - build-config
-
-- name: Create configuration for Leaf Fabric
-  hosts: leaf
-  connection: ansible.builtin.local
-  gather_facts: no
-  roles:
-    - base
-    - underlay-ebgp
-    - overlay-evpn-leaf
-    - overlay-evpn-access
-    - build-config
