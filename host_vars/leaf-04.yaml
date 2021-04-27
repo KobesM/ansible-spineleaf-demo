@@ -1,0 +1,7 @@
+---
+# Base Role variables
+host_name: leaf-04
+ip: 10.99.2.114
+mask: 24
+default_gateway: 10.99.2.1
+loopback_ip: 10.99.50.114

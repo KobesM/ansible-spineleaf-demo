@@ -1,0 +1,5 @@
+---
+- name: Assembling configurations and copying to conf folder
+  ansible.builtin.assemble:
+    src: "{{ build_dir }}"
+    dest: "{{ junos_conf }}"

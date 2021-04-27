@@ -26,3 +26,19 @@
       ansible.builtin.file: 
         path: "{{ render_dir }}"
         state: directory
+
+- name: Create configuration for Spine Fabric
+  hosts: spine
+  connection: ansible.builtin.local
+  gather_facts: no
+  roles:
+    - base
+    - build-config
+
+- name: Create configuration for Leaf Fabric
+  hosts: leaf
+  connection: ansible.builtin.local
+  gather_facts: no
+  roles:
+    - base
+    - build-config

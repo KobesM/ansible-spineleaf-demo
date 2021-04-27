@@ -3,3 +3,18 @@ ansible_network_os: junipernetworks.junos.junos
 ansible_connection: ansible.netcommon.netconf
 ansible_user: root
 ansible_password: Juniper
+
+# Base Role variables
+time_zone: Europe/Amsterdam
+nameservers:
+  - nameserver: 10.99.2.51
+  - nameserver: 10.99.2.52
+ntp_server: 10.99.2.1
+
+# Underlay-ebgp Role variables
+mtu_underlay: 9216
+
+# Overlay-evpn-spine/leaf Role variables
+mtu_overlay: 9000
+
+# Overlay EVPN Access Role variables
