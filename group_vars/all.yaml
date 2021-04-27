@@ -1,0 +1,4 @@
+# System variable used to define temporary directory
+tmp_dir: /tmp/build
+build_dir: "{{ tmp_dir }}/{{ inventory_hostname }}/tmp"
+render_dir: "{{playbook_dir}}/render"

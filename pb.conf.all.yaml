@@ -1,0 +1,50 @@
+---
+- name: Creating build directories for each host
+  hosts: junos_all
+  connection: ansible.builtin.local
+  gather_facts: no
+  tasks:
+    - name: Remove host build temp directory
+      ansible.builtin.file: 
+        path: "{{ build_dir }}"
+        state: absent
+    - name: Create host build temp directory
+      ansible.builtin.file: 
+        path: "{{ build_dir }}"
+        state: directory
+
+- name: Creating render directory for complete config files
+  hosts: localhost
+  connection: ansible.builtin.local
+  gather_facts: no
+  tasks:
+    - name: Remove render directory
+      ansible.builtin.file:
+        path: "{{ render_dir }}"
+        state: absent
+    - name: Create render directory
+      ansible.builtin.file: 
+        path: "{{ render_dir }}"
+        state: directory
+
+- name: Create configuration for Spine Fabric
+  hosts: spine
+  connection: ansible.builtin.local
+  gather_facts: no
+  roles:
+    - base
+    - underlay-ebgp
+    - overlay-evpn-spine
+    - overlay-evpn-access
+    - build-config
+
+- name: Create configuration for Leaf Fabric
+  hosts: leaf
+  connection: ansible.builtin.local
+  gather_facts: no
+  roles:
+    - base
+    - underlay-ebgp
+    - overlay-evpn-leaf
+    - overlay-evpn-access
+    - build-config
