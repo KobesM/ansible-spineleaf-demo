@@ -185,6 +185,11 @@ def deploy_baseconfig():
                         strip_prompt=False, strip_command=False
                     )
                     output += net_connect.send_command(
+                        command_string="set system services netconf ssh",
+                        expect_string=r"root#",
+                        strip_prompt=False, strip_command=False
+                    )
+                    output += net_connect.send_command(
                         command_string="delete interfaces",
                         expect_string=r"root#",
                         strip_prompt=False, strip_command=False
