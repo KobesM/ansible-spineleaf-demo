@@ -1,0 +1,17 @@
+---
+##################################################################
+## Check Connectivity
+##################################################################
+- name: Checking Connectivity to devices
+  hosts: junos_all
+  connection: ansible.netcommon.netconf
+  gather_facts: false
+  roles:
+    - Juniper.junos
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      ansible.builtin.wait_for:
+        host: "{{ ansible_ssh_host }}"
+        port: 830 
+        timeout: 5
